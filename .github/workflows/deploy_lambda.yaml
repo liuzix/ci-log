@@ -25,8 +25,8 @@ jobs:
           aws-region: us-west-2
       - name: Go Build
         run: |
-          go build
-      - name: deploy
+          make
+      - name: Deploy
         run: |
-          zip -j deploy.zip ./ci-log #--> Zip the Code As we know lambda function accept the zip file.
+          zip -j deploy.zip ./bin/s3-trigger
           aws lambda update-function-code --function-name=ci-log-s3-trigger --zip-file=fileb://deploy.zip
